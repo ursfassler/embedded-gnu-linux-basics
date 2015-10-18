@@ -1,0 +1,110 @@
+\documentclass
+[
+  12pt,
+  handout,
+  notes=show,
+  svgnames		% für xcolor, datapie
+]{beamer}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{graphicx}
+%\usepackage{hyperref}		% automatic included by beamer
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,shapes}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{appendixnumberbeamer}
+\usepackage{url}
+
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+\title{Embedded GNU/Linux Basics}
+%\subtitle{}
+\author{Urs Fässler}
+\date{21.11.2015}
+\institute
+{
+  17. LinuxDay\\
+  Dornbirn
+}
+%\subject{}
+
+\newcommand{\hnote}[1]{\only<handout>{\footnote{#1}}}
+\newcommand{\hcite}[1]{\only<handout>{\cite{#1}}}
+\bibliographystyle{plainurl}  % urlbst
+\setbeamertemplate{bibliography item}{[\theenumiv]}
+
+\lstset
+{  
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle={\bf\color{green!50!black}},
+	identifierstyle=\color{blue!25!black},
+	stringstyle=\color{orange!75!black},
+%  language=,
+%  morekeywords={signals,slots,interface,event,message,String,Integer,component,import,uses,provides,implementation,connection,elementary,begin,end,func,pure,const},
+%  numbers=none,
+  numberstyle={\color{Grey}},
+%  keywordstyle={\color{DarkRed}\bfseries},
+%  identifierstyle={\color{Blue}}
+%  columns=flexible,
+  float=tb,
+	frame=none,
+}
+
+
+\newcommand*\oldmacro{}%
+\let\oldmacro\insertshorttitle%
+\renewcommand*\insertshorttitle{%
+	\oldmacro\hfill%
+	\insertframenumber
+}
+\usetheme{Luebeck}
+
+% remove navigation bars
+\beamertemplatenavigationsymbolsempty
+
+% remove section information
+\setbeamertemplate{headline}{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Wichtig}
+	\begin{itemize}
+		\item Involvierte Software (Firmware, u-boot, Linux, Treiber, Service-Management, Services)
+		\item Boot-Prozess
+		\item Workflow mit Yocto
+	\end{itemize}
+\end{frame}
+
+\include{intro}
+\include{overview}
+\include{beispiel}
+
+
+\begin{frame}{Sonstiges}
+	\begin{itemize}
+		\item[busybox] Reimplementation von GNU/Linux Tools in einem Binary, optimiert auf groesse; oft eingeschraenker Funktionsumfang
+	\end{itemize}
+\end{frame}
+
+
+\only<handout>
+{
+\appendix
+
+\begin{frame}[allowframebreaks]{Literature}
+	\bibliography{literature}
+\end{frame}
+
+}
+
+\end{document}
