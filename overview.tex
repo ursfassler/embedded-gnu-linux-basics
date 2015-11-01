@@ -1,31 +1,5 @@
 
 
-\begin{frame}{Boot Process \cite{OMAPBootloaderOverview}}
-	\begin{tabular}{|l|l|l|}
-		\hline typ & name & funktion \\ 
-		\hline system startup & ROM Code & minimal hardware initialisierung \\ 
-		& & in boot devices nach image suchen \\
-		& & stage 1 loader ins ram laden und ausführen \\
-		
-		\hline stage 1 loader & x-loader (u-boot) & pin muxing \\ 
-		& & clock und memory initialisieren \\
-		& & stage 2 loader ins ram laden und ausführen \\
-		
-		\hline stage 2 loader & u-boot & platform initialisierung (USB, Netzwerk, \ldots) \\
-		& & boot menu / Kommandozeile anzeigen \\
-		& & Kernel und Device-Tree ins ram laden und ausführen \\
-		
-		\hline kernel & Linux & Treiber für Hardware laden \\ 
-		& & root file system mounten \\
-		& & init process starten \\
-		
-		\hline init & Systemd & Abhängigkeiten zwischen Services auflösen \\ 
-		& & Services starten \\
-		& & Services überwachen \\
-		
-		\hline 
-	\end{tabular} 
-\end{frame}
 
 
 \begin{frame}{Echtzeit}
@@ -104,18 +78,3 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Device Tree}
-	\begin{itemize}
-		\item meiste Hardware ist nicht Plug and Play
-		\item wir muessen Linux mitteilen, wo welche Hardware liegt
-		\item Device Tree listet auf, wo sich welche Hardware befindet
-		\item Linux laedt Treiber anhand Infos in Device Tree
-	\end{itemize}
-	\begin{itemize}
-		\item Struktur aehnlich wie XML
-		\item gegliedert nach BUS
-		\item beschreibt welche Hardwrae angeschlossen ist
-		\item Hierarchisch aufgebaut wie Hardware (SOC, Modul, Geraet, System)
-	\end{itemize}
-	Beispiel
-\end{frame}

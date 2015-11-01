@@ -43,7 +43,7 @@
 
 \lstset
 {  
-	basicstyle=\footnotesize\ttfamily,
+	basicstyle=\scriptsize\ttfamily,
 	keywordstyle={\bf\color{green!50!black}},
 	identifierstyle=\color{blue!25!black},
 	stringstyle=\color{orange!75!black},
@@ -54,8 +54,11 @@
 %  keywordstyle={\color{DarkRed}\bfseries},
 %  identifierstyle={\color{Blue}}
 %  columns=flexible,
-  float=tb,
+	float=tb,
 	frame=none,
+	numbers=left,                           % Line nums position
+	numberstyle=\tiny,                      % Line-numbers fonts
+	stepnumber=1                           % Step between two line-numbers
 }
 
 
@@ -72,6 +75,8 @@
 
 % remove section information
 \setbeamertemplate{headline}{}
+
+\input{lstbitbake}
 
 \begin{document}
 
@@ -100,6 +105,11 @@
 \only<handout>
 {
 \appendix
+
+\begin{frame}{important to know}
+opkg -o /opt/mume/1.8.1/sysroots/cortexa8hf-vfp-neon-poky-linux-gnueabi/ install ~/projekte/yocto/mume/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libtinyxml*
+\end{frame}
+
 
 \begin{frame}[allowframebreaks]{Literature}
 	\bibliography{literature}

@@ -43,33 +43,157 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Developer Image}
+\begin{frame}{GNU/Linux Distribution}
 	\begin{itemize}
-		\item Wie kriegen wir ein Linux drauf?
-		\item[$\rightarrow$] Yocto
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{SDK}
-	\begin{itemize}
-		\item Wie können wir Software dafür kompilieren?
-		\item[$\rightarrow$] Yocto SDK
+		\item Yocto\cite{whyYocto} \footnote{Tools und Rezepte um eigene GNU/Linux Distribution zu bauen}
 		\begin{itemize}
-			\item cross compiler
-			\item root file system
+			\item git repository mit Konfiguration des gesamten System
+			\item Patches einzelner Pakete
+			\item Optimierungen für spezifische Hardware
+			\item volle Kontrolle
+		\end{itemize}
+		\item off-the-shelf (Debian, Arch, Gentoo, Ubuntu)
+		\begin{itemize}
+			\item weite Verbreitung; bekannt
+			\item Updates werden von anderen bereitgestellt
+			\item Lizenz
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Treiber}
+\begin{frame}[fragile]{Yocto Image}
+	\begin{multicols}{2}
+		\begin{lstlisting}[title=mume-dev-image.bb,frame=single,language=bitbake]
+LICENSE = "MIT"
+
+inherit core-image
+inherit populate_sdk_qt5
+
+IMAGE_INSTALL = " \
+  packagegroup-core-boot \
+  @\ldots@-core-ssh-openssh \
+  packagegroup-mume-common \
+  packagegroup-dev-mume \
+  \
+  mupro-start \
+"
+
+IMAGE_FEATURES += " \
+  package-management \
+  debug-tweaks \
+"
+		\end{lstlisting}
+		\begin{lstlisting}[title=packagegroup-dev-mume.bb, frame=single, numbers=right, language=bitbake]
+SUMMARY = "developer tools for MUME"
+LICENSE = "MIT"
+
+inherit packagegroup
+
+RDEPENDS_${PN} = "\
+  bash \
+  devmem2 \
+  e2fsprogs \
+  htop \
+  nginx \
+  openssh-sftp \
+  perf \
+  qtbase \
+  strace \
+  time \
+  @\ldots@
+		\end{lstlisting}
+	\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Yocto Image bauen}
+	\begin{lstlisting}[frame=single,language=bash]
+$ bitbake mume-dev-image
+	\end{lstlisting}
+	\begin{table}
+		\caption{tmp/deploy/images/beaglebone/}
+		\begin{tabular}{ll}
+			\hline MLO & stage 1 loader \\ 
+			\hline u-boot.img & stage 2 loader \\ 
+			\hline uEnv.txt & u-boot Konfiguration \\ 
+			\hline zImage & Kernel \\ 
+			\hline zImage-bonegreen-mume.dtb & Device Tree \\ 
+			\hline mume-dev-image-beaglebone.tar.bz2 & rootfs \\ 
+			\hline 
+		\end{tabular} 
+	\end{table}
+\end{frame}
+
+\begin{frame}{Device Tree}
+	\begin{itemize}
+		\item meiste Hardware ist nicht Plug and Play
+		\item wir müssen Linux mitteilen, wo welche Hardware liegt
+		\item Device Tree listet auf, wo sich welche Hardware befindet
+		\item Linux lädt Treiber anhand Infos in Device Tree
+	\end{itemize}
+	\begin{itemize}
+		\item Struktur ähnlich wie XML
+		\item gegliedert nach BUS
+		\item beschreibt welche Hardware angeschlossen ist
+		\item Hierarchisch aufgebaut wie Hardware (SOC, Modul, Gerät, System)
+	\end{itemize}
+	Beispiel
+\end{frame}
+
+\begin{frame}{Boot Process \cite{OMAPBootloaderOverview}}
+	\begin{tabular}{|l|l|l|}
+		\hline typ & name & funktion \\ 
+		\hline system startup & ROM Code & minimal hardware initialisierung \\ 
+		& & in boot devices nach image suchen \\
+		& & stage 1 loader ins ram laden und ausführen \\
+		
+		\hline stage 1 loader & x-loader (u-boot) & pin muxing \\ 
+		& & clock und memory initialisieren \\
+		& & stage 2 loader ins ram laden und ausführen \\
+		
+		\hline stage 2 loader & u-boot & platform initialisierung (USB, Netzwerk, \ldots) \\
+		& & boot menu / Kommandozeile anzeigen \\
+		& & Kernel und Device-Tree ins ram laden und ausführen \\
+		
+		\hline kernel & Linux & Treiber für Hardware laden \\ 
+		& & root file system mounten \\
+		& & init process starten \\
+		
+		\hline init & Systemd & Abhängigkeiten zwischen Services auflösen \\ 
+		& & Services starten \\
+		& & Services überwachen \\
+		
+		\hline 
+	\end{tabular} 
+\end{frame}
+
+\begin{frame}[fragile]{SDK bauen}
+	\begin{lstlisting}[frame=single,language=bash, breaklines=true]
+$ bitbake mume-dev-image -c populate_sdk
+$ ls -sh tmp/deploy/sdk/
+695M mume-glibc-x86_64-mume-dev-image-cortexa8hf-vfp-neon-toolchain-2.0.sh
+	\end{lstlisting}
+	\begin{itemize}
+		\item Cross-Compiler
+		\item Entwicklerpakete (header, \ldots)
+		\item root file system (libraries, \ldots)
+		\item Paketmanager
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Services (Applikation)}
+\end{frame}
+
+\begin{frame}{Hardware ansteuern / Treiber}
 	\begin{itemize}
 		\item wie können wir die Hardware ansteuern?
-		\item[$\rightarrow$] Linux Treiber
+		\item[$\rightarrow$] Linux Treiber, Frameworks, Infrastructure:
 		\begin{itemize}
 			\item GPIO
 			\item PWM
 			\item sysfs
 			\item Device-Tree
+			\item wait-queue
+			\item interrupt
 		\end{itemize}
 	\end{itemize}
 \end{frame}
