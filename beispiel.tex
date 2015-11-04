@@ -15,12 +15,18 @@
 \begin{frame}{System}
 	\begin{itemize}
 		\item uC oder GNU/Linux?
-		\item Gegenüber einem uC wie Arduino bringt GNU/Linux
+		\item uC wie Arduino
 		\begin{itemize}
-			\item Hardware-Treiber
+			\item Echtzeit
+			\item niedrige System-Komplexität
+			\item keine Infrastruktur
+		\end{itemize}
+		\item GNU/Linux
+		\begin{itemize}
+			\item Treiber
 			\item Protokolle
-			\item Tools
-			\item erhöhte Komplexität
+			\item Memory und Prozess Management
+			\item hohe System-Komplexität
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -56,7 +62,7 @@
 		\begin{itemize}
 			\item weite Verbreitung; bekannt
 			\item Updates werden von anderen bereitgestellt
-			\item Lizenz
+			\item erlaubt Lizenz Verteilung?
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -121,6 +127,14 @@ $ bitbake mume-dev-image
 			\hline 
 		\end{tabular} 
 	\end{table}
+\end{frame}
+
+\begin{frame}{rootfs}
+	\begin{itemize}
+		\item userspace
+		\item ev. Kernel \& Device Tree
+		\item nicht bootloader
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Device Tree}
