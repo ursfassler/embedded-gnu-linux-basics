@@ -82,18 +82,25 @@
 
 \frame{\titlepage}
 
-\begin{frame}{Wichtig}
-	\begin{itemize}
-		\item Involvierte Software (Firmware, u-boot, Linux, Treiber, Service-Management, Services)
-		\item Boot-Prozess
-		\item Workflow mit Yocto
-	\end{itemize}
-\end{frame}
-
+\section{Einführung}
 \include{intro}
-\include{overview}
-\include{beispiel}
+\section{Beispiel}
+\subsection{Aufgabe}
+\include{aufgabe}
+\subsection{Infrastruktur}
+\include{infrastruktur}
+\subsection{Applikation}
+\include{applikation}
+\section{Outro}
+\include{outro}
 
+\only<handout>
+{
+\appendix
+
+\section{Backup}
+
+\include{overview}
 
 \begin{frame}{Sonstiges}
 	\begin{itemize}
@@ -101,16 +108,11 @@
 	\end{itemize}
 \end{frame}
 
-
-\only<handout>
-{
-\appendix
-
 \begin{frame}{important to know}
 opkg -o /opt/mume/1.8.1/sysroots/cortexa8hf-vfp-neon-poky-linux-gnueabi/ install ~/projekte/yocto/mume/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libtinyxml*
 \end{frame}
 
-
+\section{Literatur \& Bild-Nachweise}
 \begin{frame}[allowframebreaks]{Literature}
 	\bibliography{literature}
 \end{frame}

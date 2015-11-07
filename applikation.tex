@@ -1,0 +1,88 @@
+\begin{frame}{Services (Applikation)}
+	\begin{itemize}
+		\item Embedded System besteht meist aus mehreren Prozessen $\rightarrow$ Microservices
+		\item Webserver, Prozessueberwachung, SSH, FTP, UI
+		\item standard linux tools (busybox)
+		\item libraries
+		\item packetmanager
+		\item Hardware Ansteuerung
+		\item gutes IPC system (z.B. kdbus)
+		\item eigener Service
+		\begin{itemize}
+			\item reaktiv, event-getriggert
+			\item Qt gut geeignet
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hardware ansteuern / Treiber}
+	\begin{itemize}
+		\item wie können wir die Hardware ansteuern?
+		\item[$\rightarrow$] Linux Treiber, Frameworks, Infrastructure:
+		\begin{itemize}
+			\item GPIO
+			\item PWM
+			\item sysfs
+			\item Device-Tree
+			\item wait-queue
+			\item interrupt
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{MUME Service}
+	\begin{itemize}
+		\item wie können wir mit dem Treiber kommunizieren?
+		\item[$\rightarrow$] sysfs / D-Bus
+		\begin{itemize}
+			\item Service der den Treiber weiter abstrahiert
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{GUI}
+	\begin{itemize}
+		\item Können wir via Browser auf das System zugreifen?
+		\item[$\rightarrow$] gui
+		\begin{itemize}
+			\item nginx
+			\item fastcgi
+			\item gui
+			\item D-Bus
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Service Manager}
+	\begin{itemize}
+		\item Wie starten und managen wir die Services?
+		\item[$\rightarrow$] systemd
+		\begin{itemize}
+			\item service files schreiben
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Produktiv Image}
+	\begin{itemize}
+		\item Wie können wir die Firmware verteilen?
+		\item[$\rightarrow$] Yocto
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Was passiert bei einem Tastendruck in der Web-Applikation}
+	Geht runter:
+	\begin{itemize}
+		\item SVG, Javascript
+		\item XML/HTTP
+		\item FastCGI
+		\item MumeWeb
+		\item D-Bus
+		\item MumeSrv
+		\item SysFS
+		\item Kernel
+		\item MUME-Treiber
+		\item PWM
+		\item Servo bewegt sich!
+	\end{itemize}
+\end{frame}
