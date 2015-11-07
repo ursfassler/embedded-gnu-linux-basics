@@ -70,20 +70,29 @@ $ bitbake mume-dev-image
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Device Tree}
-	\begin{itemize}
-		\item meiste Hardware ist nicht Plug and Play
-		\item wir müssen Linux mitteilen, wo welche Hardware liegt
-		\item Device Tree listet auf, wo sich welche Hardware befindet
-		\item Linux lädt Treiber anhand Infos in Device Tree
-	\end{itemize}
-	\begin{itemize}
-		\item Struktur ähnlich wie XML
-		\item gegliedert nach BUS
-		\item beschreibt welche Hardware angeschlossen ist
-		\item Hierarchisch aufgebaut wie Hardware (SOC, Modul, Gerät, System)
-	\end{itemize}
-	Beispiel
+\begin{frame}[fragile]{Device Tree}
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item Linux kennt Hardware nicht
+			\item Device Tree beschreibt Hardware
+			\item Linux lädt Treiber anhand Device Tree
+		\end{itemize}
+		\pagebreak
+		\begin{lstlisting}[frame=,numbers=none,escapeinside={|}{|},language=]
+/ {
+  compatible = "ti,am33xx";
+
+  spi0: spi@48030000 {
+    compatible = "ti,omap4-mcspi"|\footnote{Mapping zu Treiber}|;
+    status = "disabled"|\footnote{aktivieren durch status="okay"}|;
+    reg = <0x48030000 0x400>|\footnote{Register-Position, siehe Datenblatt des SOC}|;
+    interrupts = <65>;
+    dmas = <&edma|\footnote{Referenz zum DMA Device-Tree Knoten}| 16 &edma 17 >;
+    |\dots|
+  };
+|\dots|
+		\end{lstlisting}
+	\end{multicols}
 \end{frame}
 
 \begin{frame}{Boot Process \cite{OMAPBootloaderOverview}}
