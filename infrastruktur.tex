@@ -12,8 +12,6 @@ IMAGE_INSTALL = " \
   @\ldots@-core-ssh-openssh \
   packagegroup-mume-common \
   packagegroup-dev-mume \
-  \
-  mupro-start \
 "
 
 IMAGE_FEATURES += " \
@@ -30,13 +28,11 @@ inherit packagegroup
 RDEPENDS_${PN} = "\
   bash \
   devmem2 \
-  e2fsprogs \
   htop \
   nginx \
   openssh-sftp \
   perf \
   qtbase \
-  strace \
   time \
   @\ldots@
 		\end{lstlisting}
