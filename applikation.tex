@@ -28,22 +28,24 @@
 				\node at (3,5.7) {\ldots};
 			}
 			
-			\tikzstyle{every node}=[midway,left=10mm,font=\footnotesize]
-			\draw (hw) -- (driver) node {{\visible<7->{GPIO, PWM}}};
-			\draw (driver) -- (srv) node {{\visible<6->{sysfs}}};
-			\draw (srv) -- (web) node {{\visible<5->{D-Bus}}};
-			\draw (web) -- (server) node {{\visible<4->{FastCGI}}};
-			\draw (server) -- (browser) node {{\visible<3->{HTTP}}};
-			\draw (browser) -- (gui) node {{\visible<2->{XML}}};
+			\draw (hw) -- (driver);
+			\draw (driver) -- (srv);
+			\draw (srv) -- (web);
+			\draw (web) -- (server);
+			\draw (server) -- (browser);
+			\draw (browser) -- (gui);
 		\end{tikzpicture}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Hardware}
 	\begin{multicols}{2}
-		Add picture of mume device
 		\begin{center}
-			\includegraphics[width=4cm]{res/servo_pwm.pdf}
+			\includegraphics[height=3cm]{res/mume_urs.jpg}
+		\end{center}
+		\pause
+		\begin{center}
+			\includegraphics[height=3cm]{res/servo_pwm.pdf}
 		\end{center}
 	\end{multicols}
 \end{frame}
@@ -87,11 +89,14 @@ mume_pins: mume_pins {
 				\node (userspace) {Userspace};
 				\node[below of=userspace] (driver) {Treiber};
 				\node[below of=driver] (hardware) {Hardware};
-				
-				\draw (userspace) to (driver);
-				\draw (driver) to (hardware);
+
+				\tikzstyle{every node}=[midway,left=10mm,font=\footnotesize]
+				\draw (driver) -- (hardware) node {{\visible<3->{GPIO, PWM}}};
+				\draw (userspace) -- (driver) node {{\visible<4->{sysfs}}};
 			\end{tikzpicture}
-			\includegraphics[width=0.5\textwidth]{res/mumedriver}
+			\visible<2->{
+				\includegraphics[width=0.5\textwidth]{res/mumedriver}
+			}
 		\end{center}
 	\end{multicols}
 	\only<handout>{
@@ -152,28 +157,85 @@ mume_pins: mume_pins {
 	\end{itemize}
 }
 
-\begin{frame}{Service Manager}
+\begin{frame}[fragile]{Starten der Services}
 	\begin{itemize}
-		\item Wie starten und managen wir die Services?
-		\item[$\rightarrow$] systemd
-		\begin{itemize}
-			\item service files schreiben
-		\end{itemize}
+		\item systemd / unit file
 	\end{itemize}
+	\begin{lstlisting}[frame=single,basicstyle=\small\ttfamily,escapeinside={|}{|},language=]
+[Unit]
+Description=Mume D-Bus Service
+After=dbus.target
+Wants=dbus.target
+
+[Service]
+ExecStart=/usr/bin/mumesrv /sys/|\ldots|/mume/
+
+[Install]
+WantedBy=multi-user.target
+	\end{lstlisting}
 \end{frame}
 
-\begin{frame}{Produktiv Image}
+\begin{frame}[fragile]{mumesrv Rezept}
+	\begin{lstlisting}[frame=single,language=bitbake]
+SECTION = "app"
+DESCRIPTION = "MUME D-Bus interface to hardware"
+LICENSE = "GPLv3+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9eef91148a9b14ec7f9df333daebc746"
+
+inherit qmake5
+
+DEPENDS += "qtbase"
+RDEPENDS_${PN} += "qtbase dbus"
+
+SRCREV = "3cbe61c102d9574ccd039b112704f0a42a2112f8"
+
+SRC_URI = " \
+	git://github.com/ursfassler/mumesrv.git;protocol=https;branch=master \
+	file://dbus.conf \
+"
+
+S = "${WORKDIR}/git"
+QMAKE_PROFILES = "${S}/application/application.pro"
+@\ldots@
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Produktiv Image}
+	\begin{lstlisting}[title=mume-image.bb,frame=single,language=bitbake]
+LICENSE = "MIT"
+
+inherit core-image
+
+IMAGE_INSTALL = " \
+  packagegroup-core-boot \
+  packagegroup-core-ssh-openssh \
+  packagegroup-mume-common \
+  \
+  mumesrv-start \
+  mumeweb-start \
+"
+
+IMAGE_FEATURES += " \
+  package-management \
+"
+	\end{lstlisting}
+	\pause
+	\begin{lstlisting}[frame=single,language=bash, basicstyle=\small\ttfamily]
+$ bitbake mume-image
+	\end{lstlisting}
+\end{frame}
+\note{
 	\begin{itemize}
 		\item Wie können wir die Firmware verteilen?
 		\item[$\rightarrow$] Yocto
 		\begin{itemize}
 			\item Rezepte für Services
 			\item anpassen bestehender Rezepte (nginx, qt, \ldots)
-			\item Rezept für image
+			\item Rezept für Image
 		\end{itemize}
 		\item bitbake image
 	\end{itemize}
-\end{frame}
+}
 
 %\begin{frame}{Was passiert bei einem Tastendruck in der Web-Applikation}
 %	Geht runter:

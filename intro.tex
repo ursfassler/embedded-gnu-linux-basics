@@ -20,23 +20,30 @@
 	\end{flushright}
 \end{frame}
 
-\begin{frame}{Grösse von Embedded Systemen}
-	\begin{center}
-		\footnotesize{
-			\begin{tabular}{p{5cm}p{5cm}}
+\begin{frame}{Embedded Systeme}
+	\footnotesize{
+	\begin{multicols}{2}
+				\only<handout>{Digitales Multimeter}
+				\includegraphics[height=4cm]{res/Digital_Multimeter_Aka.jpg}\hcite{multimeter}
 				\only<handout>{
-					Digitales Multimeter & ATLAS/LHC/CERN \\
+					\begin{itemize}
+						\item Sensor produziert ~20 B/sec
+						\item Reduzierung auf ~2 B/sec
+						\item Verarbeitung auf internem uC
+					\end{itemize}
 				}
-				\includegraphics[height=4cm]{res/Digital_Multimeter_Aka.jpg}\hcite{multimeter} &
-				\includegraphics[height=4cm]{res/ATLAS_Tile_Calorimeter}\hcite{tileCalorimeter} \\
+				\pagebreak
+				\only<handout>{ATLAS/LHC/CERN}
+				\visible<2->{\includegraphics[height=4cm]{res/ATLAS_Tile_Calorimeter}\hcite{tileCalorimeter}}
 				\only<handout>{
-					Sensor produziert ~20 B/sec & Sensor produziert 1 PiB/sec \\
-					Reduzierung auf ~2 B/sec & Reduzierung auf ~100 MiB/sec \hcite{wikiAtlas}\\
-					Verarbeitung auf internem uC & Verarbeitung auf eigenen 20'000 Server und Grid \hcite{wikiCernServer}
+					\begin{itemize}
+						\item Sensor produziert 1 PiB/sec
+						\item Reduzierung auf ~100 MiB/sec \hcite{wikiAtlas}
+						\item Verarbeitung auf eigenen 20'000 Server und Grid \hcite{wikiCernServer}
+					\end{itemize}
 				}
-			\end{tabular}
-		}
-	\end{center}
+	\end{multicols}
+	}
 \end{frame}
 
 \begin{frame}{Typisches GNU/Linux Embedded System}

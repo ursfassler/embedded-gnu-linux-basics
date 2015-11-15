@@ -46,18 +46,22 @@
 
 \begin{frame}{GNU/Linux Distribution}
 	\begin{itemize}
-		\item Yocto\hcite{whyYocto}\only<handout>{\footnote{Tools und Rezepte um eigene GNU/Linux Distribution zu bauen}}
-		\begin{itemize}
-			\item git repository mit Konfiguration des gesamten System
-			\item Patchen einzelner Pakete
-			\item Optimierungen auf spezifische Hardware
-			\item volle Kontrolle
-		\end{itemize}
 		\item off-the-shelf (Debian, OpenWRT, \ldots)
-		\begin{itemize}
-			\item weite Verbreitung; bekannt
-			\item Updates werden von anderen bereitgestellt
-			\item erlaubt Lizenz Verteilung?
-		\end{itemize}
+		\visible<2->{
+			\begin{itemize}
+				\item weite Verbreitung; bekannt
+				\item Updates werden von anderen bereitgestellt
+				\item erlaubt Lizenz Verteilung?
+			\end{itemize}
+		}
+		\item Yocto\hcite{whyYocto}\only<handout>{\footnote{Tools und Rezepte um eigene GNU/Linux Distribution zu bauen}}
+		\visible<3->{
+			\begin{itemize}
+				\item git repository mit Konfiguration des gesamten System
+				\item Patchen einzelner Pakete
+				\item Optimierungen auf spezifische Hardware
+				\item volle Kontrolle
+			\end{itemize}
+		}
 	\end{itemize}
 \end{frame}
