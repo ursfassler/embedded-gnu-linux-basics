@@ -6,8 +6,8 @@
 	``Unter Firmware versteht man Software, die in elektronische Geräte eingebettet ist.'' \cite{wikiFirmware}
 	
 	\begin{itemize}
-		\item Geamtes Software-Image von Embedded System
-		\item Software fuer subsyteme
+		\item Gesamtes Software-Image von Embedded System
+		\item Software für Subsysteme
 		\begin{itemize}
 			\item Power Management
 			\item WLAN Karte
@@ -15,28 +15,26 @@
 			\item Touch-Screen
 		\end{itemize}
 	\end{itemize}
-	
-	\includegraphics[height=2cm]{res/Firmware_upgrade.jpg} \cite{firmwareUpgrade}
 \end{frame}
 
 \begin{frame}{PID 1}
-	Nachdem Linux alles initializiert hat wird Kontrolle an Userspace uebergeben.
-	Ueblicherweise ist dies systemd.
+	Nachdem Linux alles initialisiert hat wird Kontrolle an Userspace übergeben.
+	Üblicherweise ist dies systemd.
 	\begin{itemize}
 		\item systemd
 		\begin{itemize}
 			\item einfach da bekannt
-			\item wenn mehrere Dienste noetig
-			\item gewisse groesse
+			\item wenn mehrere Dienste nötig
+			\item gewisse Grösse
 		\end{itemize}
-		\item script
+		\item Script
 		\begin{itemize}
 			\item wenn nur wenige Dienste
 		\end{itemize}
-		\item applikation
+		\item Applikation
 		\begin{itemize}
 			\item Applikation muss alles machen
-			\item nur fuer monolithische Applikationen
+			\item nur für monolithische Applikationen
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -45,23 +43,22 @@
 	Aufgaben um Embedded system zu erstellen
 	\begin{itemize}
 		\item Cross Compiler bauen
-		\item sysfs bauen (Kernel und benoetigte Tools fuer system)
-		\item Cross Compiler und sysfs fuer Developer bereitstellen (sdk)
+		\item sysfs bauen (Kernel und benötigte Tools für System)
+		\item Cross Compiler und sysfs für Developer bereitstellen (SDK)
 	\end{itemize}
 	Aufgaben um Embedded system zu deployen
 	\begin{itemize}
 		\item Applikation cross-compilen
 		\item sysfs cross-compilen
 		\item Kernel cross-compilen
-		\item applikationen packetieren
-		\item image zusammenstellen
+		\item Applikationen paketieren
+		\item Image zusammenstellen
 	\end{itemize}
-	daher Yocto (Yocto Workflow zeigen, resp. bild aus fsfe präsentation)
 \end{frame}
 
 \begin{frame}{Kernel / Linux}
 	\begin{itemize}
-		\item Verteilen von Resourcen
+		\item Verteilen von Ressourcen
 		\item Initialisieren und Abstrahieren der Hardware
 	\end{itemize}
 \end{frame}

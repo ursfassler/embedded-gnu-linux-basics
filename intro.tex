@@ -1,51 +1,62 @@
-\begin{frame}{Was ist ein Embedded System?}
-	Der Ausdruck embedded system bezeichnet einen Computer, der in einem technischen Kontext eingebettet ist. \cite{wikiEmbedded}
+\begin{frame}{Eigenschaften Embedded System\hcite{embeddedSpecials}}
+	\pause
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item Kosten
+			\item Grösse
+			\item Energie
+			\item Zuverlässigkeit
+			\item Sicherheit
+			\item Langlebigkeit
+			\item Echtzeit
+		\end{itemize}
+	\end{multicols}
+\end{frame}
+
+\begin{frame}{Definition Embedded System}
+	Der Ausdruck embedded system bezeichnet einen Computer, der in einem technischen Kontext eingebettet ist. \hcite{wikiEmbedded}
 	\begin{flushright}
 		Nach Wikipedia
 	\end{flushright}
-	
-	Was macht ein Embedded System speziell \cite{embeddedSpecials}
-	\begin{itemize}
-		\item Echtzeit
-		\item Grösse
-		\item Kosten
-		\item Zeit
-		\item Zuferlässigkeit
-		\item Sicherheit
-		\item Energy
-		\item Langlebigkeit
-	\end{itemize}
 \end{frame}
 
-\begin{frame}{grosses Embedded System: ATLAS/LHC/CERN}
+\begin{frame}{Grösse von Embedded Systemen}
 	\begin{center}
-		\begin{tabular}{cc}
-			\includegraphics[height=4cm]{res/ATLAS_Tile_Calorimeter} &  \includegraphics[height=4cm]{res/CERN_server.jpg} \\ 
-			cc-by-sa-2.0 Argonne National Laboratory & cc-by-sa Urs Fässler \\
-		\end{tabular} 
+		\footnotesize{
+			\begin{tabular}{p{5cm}p{5cm}}
+				\only<handout>{
+					Digitales Multimeter & ATLAS/LHC/CERN \\
+				}
+				\includegraphics[height=4cm]{res/Digital_Multimeter_Aka.jpg}\hcite{multimeter} &
+				\includegraphics[height=4cm]{res/ATLAS_Tile_Calorimeter}\hcite{tileCalorimeter} \\
+				\only<handout>{
+					Sensor produziert ~20 B/sec & Sensor produziert 1 PiB/sec \\
+					Reduzierung auf ~2 B/sec & Reduzierung auf ~100 MiB/sec \hcite{wikiAtlas}\\
+					Verarbeitung auf internem uC & Verarbeitung auf eigenen 20'000 Server und Grid \hcite{wikiCernServer}
+				}
+			\end{tabular}
+		}
 	\end{center}
-	\begin{itemize}
-		\item Sensor produziert 1 petabyte Daten pro Sekunde
-		\item Systems verarbeitet dies auf etwas mehr als 100 MB pro Sekunde \cite{wikiAtlas}
-		\item Verarbeitung auf eigenen 20'000 Server und Grid \cite{wikiCernServer}
-	\end{itemize}
 \end{frame}
 
-\begin{frame}{prototypisches GNU/Linux Embedded System}
-	Raspberry PI
-	BeagleBone
+\begin{frame}{Typisches GNU/Linux Embedded System}
+	\begin{center}
+		\includegraphics[width=5cm]{res/RaspberryPi.jpg}\hcite{raspberryPi}
+		\includegraphics[width=3.5cm]{res/Beaglebone_Black.jpg}\hcite{beagleboneBlack}
+	\end{center}
 \end{frame}
 
 \begin{frame}{Echtzeit}
-	\begin{itemize}
-		\item Bearbeitung ist nach einer bestimmten Zeit nach dem auftreten eines Ereignisses abgeschlossen.
-		\item Die Bearbeitung eines Interrupts dauert nie laenger als $t$.
-		\item bei weicher Echtzeit ist dieses Verhalten wuenschenswert (Video wiedergabe)
-		\item jeder Treiber kann Interrupts sperren
-		\item Swapping
-		\item Prozessoren mit Caches haben undefinierbares Verhalten, abschalten nicht Sinn der Sache
-		\item Loesung ist separater uC, im selben oder eigenen DIE
-	\end{itemize}
+	\begin{center}
+		\includegraphics[width=8cm]{res/echtzeit.pdf}
+	\end{center}
+	\only<handout>{
+		\begin{itemize}
+			\item Bearbeitung ist nach einer bestimmten Zeit nach dem auftreten eines Ereignisses abgeschlossen.
+			\item bei weicher Echtzeit ist dieses Verhalten wünschenswert (Video Wiedergabe)
+			\item Linux ist nicht Echtzeit-Fähig
+			\item Echtzeit ist oft nicht nötig
+			\item Lösung ist separater uC, im SOC oder dediziertem Chip
+		\end{itemize}
+	}
 \end{frame}
-
-

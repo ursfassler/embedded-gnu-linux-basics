@@ -3,58 +3,57 @@
 		\item Webserver für Most Useless Machine Ever!
 	\end{itemize}
 	\begin{center}
-		\includegraphics[width=0.75\textwidth]{res/mume.jpg}
-		\cite{mumePic}
+		\includegraphics[width=0.6\textwidth]{res/mume.jpg}
+		\hcite{mumePic}
 	\end{center}
 \end{frame}
 
 \begin{frame}{System}
-	\begin{itemize}
-		\item uC oder GNU/Linux?
-		\item uC wie Arduino
-		\begin{itemize}
-			\item Echtzeit
-			\item niedrige System-Komplexität
-			\item keine Infrastruktur
-		\end{itemize}
-		\item GNU/Linux
-		\begin{itemize}
-			\item Treiber
-			\item Protokolle
-			\item Memory und Prozess Management
-			\item hohe System-Komplexität
-		\end{itemize}
-	\end{itemize}
+	\begin{center}
+		\begin{tabular}{cc}
+			Bare Metal uC & GNU/Linux SOC \\
+			\includegraphics[height=3cm]{res/arduino.jpg} & \includegraphics[height=3.5cm]{res/Beaglebone_Black.jpg} \\
+			\only<handout>{
+				Echtzeit & Memory und Prozess Management\\
+				niedrige System-Komplexität & Treiber \& Protokolle\\
+				keine Infrastruktur & hohe System-Komplexität
+			}
+		\end{tabular} 
+	\end{center}
 \end{frame}
 
 \begin{frame}{Hardware}
-	\begin{itemize}
-		\item Eval-/Bastelboards (Raspi, BeagleBone)
-		\item Consumer Hardware (Router, Media-Center, \ldots)
-		\item Profesionelle Boards
-		\item[$\rightarrow$] BeagleBone Green
+	\begin{center}
+		\includegraphics[height=2.7cm]{res/Development_Kit_EDK6446.jpg}\hcite{industrialBoard}
+		\includegraphics[height=2.8cm]{res/router.jpg}\hcite{router}
+		\includegraphics[height=3cm]{res/Beaglebone_Black.jpg}\hcite{beagleboneBlack}
+	\end{center}
+	\only<handout>{
 		\begin{itemize}
-			\item Netzwerk
-			\item USB
-			\item Yocto Supported
-			\item viele Anshlüsse
-			\item USB Powered
-			\item kein Display Anschluss
-			\item bereits Erfahrung
+			\item Industrie-Boards
+			\item Consumer Hardware (Router, Media-Center, \ldots)
+			\item Eval-/Bastelboards (Raspi, BeagleBone)
+			\item[$\rightarrow$] BeagleBone Green
+			\begin{itemize}
+				\item Netzwerk
+				\item Yocto Supported
+				\item viele Anshlüsse
+				\item USB Powered
+			\end{itemize}
 		\end{itemize}
-	\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}{GNU/Linux Distribution}
 	\begin{itemize}
-		\item Yocto\cite{whyYocto} \footnote{Tools und Rezepte um eigene GNU/Linux Distribution zu bauen}
+		\item Yocto\hcite{whyYocto}\only<handout>{\footnote{Tools und Rezepte um eigene GNU/Linux Distribution zu bauen}}
 		\begin{itemize}
 			\item git repository mit Konfiguration des gesamten System
-			\item Patches einzelner Pakete
-			\item Optimierungen für spezifische Hardware
+			\item Patchen einzelner Pakete
+			\item Optimierungen auf spezifische Hardware
 			\item volle Kontrolle
 		\end{itemize}
-		\item off-the-shelf (Debian, Arch, Gentoo, Ubuntu)
+		\item off-the-shelf (Debian, OpenWRT, \ldots)
 		\begin{itemize}
 			\item weite Verbreitung; bekannt
 			\item Updates werden von anderen bereitgestellt
