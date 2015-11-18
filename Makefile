@@ -1,40 +1,27 @@
 
 handname=handout
-slidename=slides
-backupname=backup
+slidename=slide
 bibname=literature
-pdfprexif=embedded_gnu_linux_basics_
+pdfname=embedded_gnu_linux_basics
 
-quick: handout backup slide pdfclean
-#	evince $(pdfprexif)$(handname).pdf &
-#	evince $(pdfprexif)$(backupname).pdf &
-#	evince $(pdfprexif)$(slidename).pdf &
+merged: handout slide
+	gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=$(pdfname).pdf $(pdfname)_$(slidename).pdf $(pdfname)_$(handname).pdf
 
 handout:
 	-pdflatex -draftmode -halt-on-error $(handname).tex 1> /dev/null
 	bibtex $(handname) 1> /dev/null
 	pdflatex -draftmode -halt-on-error $(handname).tex 1> /dev/null
 	pdflatex -halt-on-error $(handname).tex 1> /dev/null
-	mv $(handname).pdf $(pdfprexif)$(handname).pdf
-
-backup:
-	-pdflatex -draftmode -halt-on-error $(backupname).tex 1> /dev/null
-	bibtex $(backupname) 1> /dev/null
-	pdflatex -draftmode -halt-on-error $(backupname).tex 1> /dev/null
-	pdflatex -halt-on-error $(backupname).tex 1> /dev/null
-	mv $(backupname).pdf $(pdfprexif)$(backupname).pdf
+	mv $(handname).pdf $(pdfname)_$(handname).pdf
 
 slide:
 	pdflatex -draftmode -halt-on-error $(slidename).tex 1> /dev/null
 	pdflatex -halt-on-error $(slidename).tex 1> /dev/null
-	mv $(slidename).pdf $(pdfprexif)$(slidename).pdf
+	mv $(slidename).pdf $(pdfname)_$(slidename).pdf
 
-pdfclean:
+clean:
 	rm -f $(bibname)-blx.bib *.log *.toc *.aux *.bbl *.blg *.lof *.lot *.out *.bak *.nav *.snm *.vrb
 
-png: ps
-	pstoimg -multi -type png -scale 2 -aaliastext -aaliastext $(handname).ps
-
-clean: 
-	rm -f *.dvi *.pdf *.ps *.png
+clear: 
+	rm -f *.dvi *.pdf *.ps
 
