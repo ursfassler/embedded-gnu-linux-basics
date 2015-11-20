@@ -5,16 +5,25 @@
 		\end{itemize}
 	}
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{res/mume.jpg}
+		\includegraphics[height=4cm]{res/mume.jpg}
 		\hcite{mumePic}
+		\visible<2->{
+			\includegraphics[height=4cm]{res/mumehtml.pdf}
+		}
 	\end{center}
 \end{frame}
+
+\begin{frame}{Vorgehen}
+\tableofcontents
+\end{frame}
+
+\section{Hardware}
 
 \begin{frame}{System}
 	\begin{center}
 		\begin{tabular}{cc}
 			Bare Metal uC & GNU/Linux SOC \\
-			\includegraphics[height=3cm]{res/arduino.jpg} & \includegraphics[height=3.5cm]{res/Beaglebone_Black.jpg} \\
+			\includegraphics[height=3cm]{res/arduino.jpg} & \includegraphics[height=3cm]{res/RaspberryPi.jpg}\hcite{raspberryPi} \\
 			\only<handout>{
 				Echtzeit & Memory und Prozess Management\\
 				niedrige System-Komplexität & Treiber \& Protokolle\\
@@ -24,7 +33,7 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}{Hardware}
+\begin{frame}{Board}
 	\begin{center}
 		\includegraphics[height=2.7cm]{res/Development_Kit_EDK6446.jpg}\hcite{industrialBoard}
 		\includegraphics[height=2.8cm]{res/router.jpg}\hcite{router}
@@ -45,6 +54,8 @@
 		\end{itemize}
 	}
 \end{frame}
+
+\section{OS}
 
 \begin{frame}{GNU/Linux Distribution}
 	\begin{itemize}

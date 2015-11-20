@@ -66,7 +66,21 @@
 \beamertemplatenavigationsymbolsempty
 
 % remove section information
-\setbeamertemplate{headline}{}
+\setbeamertemplate{headline}{\insertsection}
+\setbeamertemplate{frametitle}
+{\vskip-3pt
+  \leavevmode
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1ex]{frametitle}%
+    \raggedright
+    \hspace*{0.5em}
+    \Large\insertframetitle\hfill\normalsize\insertsection
+    \hspace*{0.5em}
+  \end{beamercolorbox}
+  }%
+}
+
+%\AtBeginSection{\frame{\sectionpage}}
 
 \input{lstbitbake}
 
@@ -74,16 +88,13 @@
 
 \frame{\titlepage}
 
-\section{Einführung}
+%\section{Einführung}
+\section*{Intro}
 \include{intro}
-\section{Beispiel}
-\subsection{Aufgabe}
 \include{aufgabe}
-\subsection{Infrastruktur}
 \include{infrastruktur}
-\subsection{Applikation}
 \include{applikation}
-\section{Outro}
+\section*{Outro}
 \include{outro}
 
 \only<handout>

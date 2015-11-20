@@ -59,6 +59,8 @@ $ bitbake mume-dev-image
 	\end{table}
 \end{frame}
 
+\section{Image}
+
 \begin{frame}[fragile]{rootfs}
 	\begin{lstlisting}[frame=,numbers=none,escapeinside={@}{@},language=,basicstyle=\small\ttfamily]
 /
@@ -173,6 +175,8 @@ $ bitbake mume-dev-image
 	}
 }
 
+\section{SDK}
+
 \begin{frame}[fragile]{SDK bauen}
 	\pause
 	\begin{lstlisting}[frame=single,language=bash, breaklines=true, basicstyle=\small\ttfamily]
@@ -182,9 +186,9 @@ $ ls -sh tmp/deploy/sdk/
 	\end{lstlisting}
 	\pause
 	\begin{itemize}
+		\item Entwicklerpakete (Header, \ldots)
 		\item Cross-Compiler
 		\item rootfs (Libraries, \ldots)
-		\item Entwicklerpakete (Header, \ldots)
 		\item Paketmanager
 	\end{itemize}
 \end{frame}

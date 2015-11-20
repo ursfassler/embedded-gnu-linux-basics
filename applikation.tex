@@ -1,4 +1,6 @@
-\begin{frame}{Applikation}
+\section{Applikation}
+
+\begin{frame}{Übersicht}
 	\begin{center}
 		\begin{tikzpicture}[thick]
 			\tikzstyle{every node}=[shape=rectangle, rounded corners,
@@ -157,6 +159,8 @@ mume_pins: mume_pins {
 	\end{itemize}
 }
 
+\section{Deployment}
+
 \begin{frame}[fragile]{Starten der Services}
 	\begin{itemize}
 		\item systemd / unit file
@@ -213,6 +217,7 @@ IMAGE_INSTALL = " \
   \
   mumesrv-start \
   mumeweb-start \
+  mumehtml \
 "
 
 IMAGE_FEATURES += " \
@@ -236,20 +241,3 @@ $ bitbake mume-image
 		\item bitbake image
 	\end{itemize}
 }
-
-%\begin{frame}{Was passiert bei einem Tastendruck in der Web-Applikation}
-%	Geht runter:
-%	\begin{itemize}
-%		\item SVG, Javascript
-%		\item XML/HTTP
-%		\item FastCGI
-%		\item MumeWeb
-%		\item D-Bus
-%		\item MumeSrv
-%		\item SysFS
-%		\item Kernel
-%		\item MUME-Treiber
-%		\item PWM
-%		\item Servo bewegt sich!
-%	\end{itemize}
-%\end{frame}
